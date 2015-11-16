@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+	layout:decorator="default_layout">
+<head>
+<title>付款-列表</title>
+</head>
+<body>
+	<aside class="right-side" layout:fragment="content-header">
+		<!-- Content Header (Page header) -->
+		<section class="content-header">
+			<h1 style="float:left">付款记录</h1>
+			<div style="margin-left:500px">
+				<a th:href="@{/timeOfPayment/(contractId=${contractId})}" href="timeOfPaymentForm.html"
+						class="btn btn-warning"> 新建付款 </a>
+			</div>
+		</section>
+
+		<!-- Main content -->
+
+	</aside>
+	<!-- /.right-side -->
+
+	<div layout:fragment="content" class="container"
+		style="margin-left: 240px;">
+
+		
+		<!-- /.col-lg-6 -->
+		<div>
+			<table class="table table-bordered table-striped">
+				<thead>
+					<tr>
+						<td>计划付款日期</td>
+						<td>实际付款日期</td>
+						<td>内容</td>
+						<td>提醒付款日期</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:if="${timeOfPayments.empty}">
+						<td colspan="4">没有付款</td>
+					</tr>
+					<tr th:each="timeOfPayment : ${timeOfPayments}">
+						<td ><a href="timeOfPaymentView.html"
+							th:href="@{'/timeOfPayment/' + ${timeOfPayment.id}}" th:text="${timeOfPayment.plannedTimeOfPayment}">
+							</a>
+						</td>
+						<td><a href="timeOfPaymentView.html"
+							th:href="@{'/timeOfPayment/' + ${timeOfPayment.id}}" th:text="${timeOfPayment.actualTimeOfPayment}">
+								actualTimeOfPayment</a></td>
+						<td th:text="${timeOfPayment.content}">content</td>
+						<td th:text="${timeOfPayment.alertDate}">alertDate</td>
+					</tr>
+					
+				</tbody>
+			</table>
+		</div>
+	</div>
+</body>
+</html>

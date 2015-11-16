@@ -1,0 +1,16 @@
+com\neeq\contractManagementSys\domain\ContractToPerson.class
+com\neeq\contractManagementSys\repository\TimeOfPaymentRepository.class
+com\neeq\contractManagementSys\domain\Contract.class
+com\neeq\contractManagementSys\repository\ContractToPersonRepository.class
+com\neeq\contractManagementSys\service\ContractService.class
+com\neeq\contractManagementSys\domain\Person.class
+com\neeq\contractManagementSys\controller\ContractController.class
+com\neeq\contractManagementSys\ContractManagementSysApp.class
+com\neeq\contractManagementSys\repository\PersonRepository.class
+com\neeq\contractManagementSys\task\ContractTask.class
+com\neeq\contractManagementSys\domain\Manager.class
+com\neeq\contractManagementSys\repository\RenewalRepository.class
+com\neeq\contractManagementSys\domain\TimeOfPayment.class
+com\neeq\contractManagementSys\repository\ManagerRepository.class
+com\neeq\contractManagementSys\domain\Renewal.class
+com\neeq\contractManagementSys\repository\ContractRepository.class

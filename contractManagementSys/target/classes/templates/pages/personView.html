@@ -1,0 +1,51 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+	layout:decorator="default_layout">
+<head>
+<title>Contracts : View</title>
+</head>
+<body>
+	<aside class="right-side" layout:fragment="content-header">
+		<!-- Content Header (Page header) -->
+		<section class="content-header">
+			<h1 id="id" th:text="${person.id}"  style="float:left">
+                id
+            </h1>
+            <div style="margin-left:500px">
+				<a th:href="@{'/person/edit/' + ${person.id}}" href="personEdit.html" class="btn btn-primary"> 修改信息 </a>
+        		<a th:href="@{'/person/delete/' + ${person.id}}" href="personList.html" class="btn btn-danger"> delete person </a> 
+        	</div>
+		</section>
+	</aside>
+	<!-- /.right-side -->
+	<div layout:fragment="content" class="container"
+		style="margin-left: 240px">
+		<div class="alert alert-success" th:if="${globalMessage}"
+			th:text="${globalMessage}" style="margin-left: 20px">Some
+			Success message</div>
+		
+
+		<div style="margin-top: 30px; width: 60%; margin-left: 30px;" class="">
+			
+
+			<p><div class="panel panel-info">
+				<div class="panel-heading">
+					<h3 class="panel-title">姓名</h3>
+				</div>
+				<div class="panel-body" id="name" th:text="${person.name}">
+					name</div>
+
+			</div></p>
+			<p><div class="panel panel-info" style="width:200px">
+				<div class="panel-heading">
+					<h3 class="panel-title">Email</h3>
+				</div>
+				<div class="panel-body" id="state" th:text="${person.email}">
+					email</div>
+			</div></p>
+			
+		</div>
+
+	</div>
+</body>
+</html>

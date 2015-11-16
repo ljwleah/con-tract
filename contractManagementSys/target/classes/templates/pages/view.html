@@ -1,0 +1,98 @@
+<html xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+  layout:decorator="default_layout">
+  <head>
+    <title>合同-详情</title>
+  </head>
+  <body>
+	<aside class="right-side" layout:fragment="content-header">
+        <!-- Content Header (Page header) -->
+        <section class="content-header" style="height:60px">
+            <h1 th:text="${contract.contractId}" style="float:left">
+                id
+            </h1>
+            <div style="margin-left:500px">
+            	<a th:href="@{/contractHistory/list(originalId=${contract.id})}" href="contractHistoryList.html" class="btn btn-warning" >历史记录</a>
+	            <a th:href="@{'/edit/' + ${contract.id}}" href="edit.html" class="btn btn-primary">修改合同</a>
+	        	<a th:href="@{/renewal/list(contractId=${contract.id})}" href="renewalList.html" class="btn btn-warning" >续签</a>
+	        	<!-- <a th:href="@{/timeOfPayment/list(contractId=${contract.id})}" href="timeOfPaymentList.html" class="btn btn-warning" >付款</a> -->
+	        	<a th:href="@{'/timeOfPayment/list/' + ${contract.id}}" href="timeOfPaymentList.html" class="btn btn-warning" >付款</a>
+	        	<a th:href="@{/check/list(contractId=${contract.id})}" href="checkList.html" class="btn btn-warning" > 验收</a>
+        	</div>
+        </section>
+    </aside><!-- /.right-side -->
+    <div layout:fragment="content" class="container" style= "margin-left:240px">
+      <div class="alert alert-success"
+          th:if="${globalMessage}"
+          th:text="${globalMessage}" style= "margin-left:20px">
+        Some Success message
+      </div>
+     
+      <div class="mainContent" style="width:800px;margin-left:30px;" >
+      	<table class="table table-bordered table-striped" style="width:800px">
+			<tbody>
+				<tr>
+					<td colspan="1" width="80px">合同名称</td>
+					<td colspan="5" th:text="${contract.name}"> name </td>
+				</tr>
+				<tr>
+					<td colspan="1" width="80px">乙方</td>
+					<td colspan="5" th:text="${contract.partyB}"></td>
+				</tr>
+				<tr>
+					<td>合同编号</td>
+					<td width="140px" th:text="${contract.contractId}"></td>
+					<td width="100px">合同组别</td>
+					<!-- <td width="170px" th:text="${contract.groupId}"></td> -->
+					<td width="170px" th:text="${groupName}"></td>
+					<td width="120px">合同类型</td>
+					<td  th:text="${typeName}"></td>
+					
+				</tr>
+				<tr>
+					<td>合同状态</td>
+					<td th:text="${state}"></td>
+					<td >父合同</td>
+					<td th:text="${parentName}"></td>
+					<td>合同金额（万）</td>
+					<td  th:text="${contract.total}"></td>	
+				</tr>
+				<tr>
+					<td>签订时间</td>
+					<td  th:text="${contract.signDate}"></td>
+					<td >起止时间</td>
+					<td th:text="${contract.startingDate}+' -- '+${contract.endDate}"></td>
+					<td >有效期（月）</td>
+					<td  th:text="${contract.validPeriod}"></td>
+				</tr>
+				<tr>
+					<td>经办人</td>
+					<td  th:text="${contract.operatorName}"></td>
+					<td >经办人Email</td>
+					<td th:text="${contract.email}"></td>
+					<td width="110px">经办开始时间</td>
+					<td  th:text="${contract.operatorStartDate}"></td>
+				</tr>
+				
+				<!-- <tr>
+					<td colspan="1">合同概要</td>
+					<td colspan="5" th:text="${contract.summary}" style="word-break:break-all; word-wrap:break-word;" ></td>
+				</tr> -->
+				<tr>
+					<td colspan="6">合同概要</td>
+				</tr>
+				<tr>
+					<td colspan="6" th:text="${contract.summary}" style="word-break:break-all; word-wrap:break-word;" ></td>
+				</tr>
+				<tr>
+					<td colspan="1" width="80px">备注</td>
+					<td colspan="5" th:text="${contract.remark}" > </td>
+				</tr>
+			</tbody>
+		</table>
+		
+      </div>
+      
+    </div>
+  </body>
+</html>

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+	layout:decorator="default_layout">
+<head>
+<title>合同-新建</title>
+<!-- 	<link href="../../bootstrap-datetimepicker-master/css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css" th:href="@{/bootstrap-datetimepicker-master/css/bootstrap-datetimepicker.min.css}"/> -->
+<link href="../../bootstrap-datetimepicker-master/datepicker.css"
+	rel="stylesheet" type="text/css"
+	th:href="@{/bootstrap-datetimepicker-master/datepicker.css}" />
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"
+	href="../../css/bootstrap.min.css" />
+<link href="../../css/bootstrap.min.css" rel="stylesheet"
+	type="text/css" th:href="@{/css/bootstrap.min.css}" />
+<!-- font Awesome -->
+<link href="../../css/font-awesome.min.css" rel="stylesheet"
+	type="text/css" th:href="@{/css/font-awesome.min.css}" />
+<!-- Ionicons -->
+<link href="../../css/ionicons.min.css" rel="stylesheet" type="text/css"
+	th:href="@{/css/ionicons.min.css}" />
+<!-- Morris chart -->
+<link href="../../css/morris/morris.css" rel="stylesheet"
+	type="text/css" th:href="@{/css/morris/morris.css}" />
+<!-- jvectormap -->
+<link href="../../css/jvectormap/jquery-jvectormap-1.2.2.css"
+	rel="stylesheet" type="text/css"
+	th:href="@{/css/jvectormap/jquery-jvectormap-1.2.2.css}" />
+<!-- fullCalendar -->
+<link href="../../css/fullcalendar/fullcalendar.css" rel="stylesheet"
+	type="text/css" th:href="@{/css/fullcalendar/fullcalendar.css}" />
+<!-- Daterange picker -->
+<link href="../../css/daterangepicker/daterangepicker-bs3.css"
+	rel="stylesheet" type="text/css"
+	th:href="@{/css/daterangepicker/daterangepicker-bs3.css}" />
+<!-- bootstrap wysihtml5 - text editor -->
+<link href="../../css/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css"
+	rel="stylesheet" type="text/css"
+	th:href="@{/css/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css}" />
+<!-- Theme style -->
+<link href="../../css/AdminLTE.css" rel="stylesheet" type="text/css"
+	th:href="@{/css/AdminLTE.css}" />
+
+</head>
+<body>
+
+	<aside class="right-side" layout:fragment="content-header">
+		<!-- Content Header (Page header) -->
+		<section class="content-header">
+			<h1>新建合同</h1>
+			
+		</section>
+
+		<!-- Main content -->
+
+	</aside>
+	<!-- /.right-side -->
+	<div layout:fragment="content" class="container">
+		<form id="contractForm" th:action="@{/create}" th:object="${contractVO}"
+			action="#" method="post" style="margin-left: 280px; margin-top: 30px">
+			<div th:if="${#fields.hasErrors('*')}" class="alert alert-error">
+				<p th:each="error : ${#fields.errors('*')}" th:text="${error}">
+					Validation error</p>
+			</div>
+
+			<p>
+			<div class="input-block">
+				<label ><span>组别</span></label>
+				<select th:field="*{groupId}" style="width: 250px; height: 30px">
+					<option value="1">开发</option>
+					<option value="2">运维</option>
+				</select>
+			</div>
+			</p>
+			<p>
+			<div class="input-block">
+				<label ><span>合同ID</span></label>
+				<input type="text" th:field="*{contractId}"
+					th:class="${#fields.hasErrors('contractId')} ? 'field-error'" />
+			</div>
+			</p>
+			<p>
+			<div class="input-block">
+				<label ><span>合同名称</span></label>
+				<input  type="text" th:field="*{name}"
+					th:class="${#fields.hasErrors('name')} ? 'field-error'" />
+			</div>
+			</p>
+			<p>
+			<div class="input-block">
+				<label ><span>合同类型</span></label>
+				<select th:field="*{type}" style="width: 250px; height: 30px">
+					<option value="1">服务类合同</option>
+					<option value="2">硬件系统集成合同</option>
+					<option value="3">应用系统开发类合同</option>
+					<option value="4">应用产品采购类合同</option>
+					<option value="5">框架类合同</option>
+				</select>
+			</div>
+			</p>
+			
+			<p>
+			<div class="input-block">
+				<label><span>父合同名称</span></label>
+				<select th:field="*{parentContractId}" style="width: 250px; height: 30px">
+					<option value="-1">无</option>
+					<option th:each="contract : ${contracts}" th:value = "${contract.id}" th:text="${contract.name}"></option>
+				</select>
+			</div>
+			</p>
+			<p>
+			<div class="input-block">
+				<label><span>合同状态</span></label>
+				<select th:field="*{state}" th:class="${#fields.hasErrors('state')} ? 'field-error'" style="width: 250px; height: 30px">
+					<option value="1">合同执行中</option>
+					<option value="2">合同完成</option>
+				</select>
+			</div>
+			</p>
+			<p>
+
+			<div class="input-block">
+				<label><span>总额（万元）</span></label>
+				<input id="total"  type="text" th:field="*{total}"
+					th:class="${#fields.hasErrors('total')} ? 'field-error'" />
+			</div>
+		</p>
+			<!-- <p><div class="input-block">
+				<label><span>经办人</span></label>
+				<input style="width: 250px;" type="text" th:field="*{operatorName}"
+					th:class="${#fields.hasErrors('operatorName')} ? 'field-error'" />
+			</div></p>
+			<p><div class="input-block">
+				<label><span>经办人Email</span></label>
+				<input style="width: 250px;" type="text" th:field="*{email}"
+					th:class="${#fields.hasErrors('email')} ? 'field-error'" />
+			</div></p> -->
+			<p><div class="input-block">
+				<label><span>经办开始时间</span></label>
+				<div class="input-append date">
+					<input type="text" th:field="*{operatorStartDate}"
+						th:class="${#fields.hasErrors('operatorStartDate')} ? 'field-error'"
+						id="datetimepicker" value="2012-06-15" width="250px;" />
+				</div>
+			</div></p>
+			<p>
+			
+			<div class="input-block">
+				<label ><span>签订日期</span></label>
+				<div class="input-append date">
+					<input type="text" th:field="*{signDate}"
+						th:class="${#fields.hasErrors('signDate')} ? 'field-error'"
+						id="datetimepicker2" value="2012-06-15" width="250px;" />
+				</div>
+			</div>
+</p>
+			<p>
+			<div class="input-block">
+				<label ><span>起始日期</span></label>
+				<div class="input-append date">
+					<input type="text" th:field="*{startingDate}"
+						th:class="${#fields.hasErrors('startingDate')} ? 'field-error'"
+						id="datetimepicker3" value="2012-06-15" width="250px;" />
+				</div>
+			</div>
+			</p>
+			<p>
+			<div class="input-block">
+				<label ><span>截止日期</span></label>
+				<div class="input-append date">
+					<input type="text" th:field="*{endDate}"
+						th:class="${#fields.hasErrors('endDate')} ? 'field-error'"
+						id="datetimepicker4" value="2012-06-15" width="250px;" />
+				</div>
+			</div>
+			</p>
+			<p>
+			<div class="input-block">
+				<label ><span>合同有效期（月）</span></label>
+				<input id="validPeriod" type="text" th:field="*{validPeriod}"
+					th:class="${#fields.hasErrors('validPeriod')} ? 'field-error'" />
+			</div>
+			</p>
+			<p>
+			<div class="input-block">
+				<label><span>乙方</span></label>
+				<input th:field="*{partyB}"
+					th:class="${#fields.hasErrors('partyB')} ? 'field-error'"/>
+			</div>
+			</p>
+			<p>
+			<div class="input-block">
+				<label><span>合同概要</span></label>
+				<textarea style="width: 250px;" th:field="*{summary}"
+					th:class="${#fields.hasErrors('summary')} ? 'field-error'"></textarea>
+			</div>
+			</p>
+			<!-- <p>
+			<div class="input-block">
+				<label><span>合同内容</span></label>
+				<textarea style="width: 250px;" th:field="*{content}"
+					th:class="${#fields.hasErrors('content')} ? 'field-error'"></textarea>
+			</div>
+			</p> -->
+			<p>
+			<div class="input-block">
+				<label ><span>备注</span></label>
+				<textarea style="width: 250px;" th:field="*{remark}"
+					th:class="${#fields.hasErrors('remark')} ? 'field-error'"></textarea>
+			</div>
+			</p>
+			<button class="btn btn-primary" style="margin-left: 180px;"
+				type="submit">新建</button>
+		</form>
+
+
+	</div>
+        <script src="/js/AdminLTE/app.js" type="text/javascript" th:src="@{/js/AdminLTE/app.js}"></script>
+        
+</body>
+</html>

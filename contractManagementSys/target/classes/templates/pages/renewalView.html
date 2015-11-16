@@ -1,0 +1,75 @@
+<html xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+  layout:decorator="default_layout">
+  <head>
+    <title>续签详情</title>
+  </head>
+  <body>
+	<aside class="right-side" layout:fragment="content-header">
+        <!-- Content Header (Page header) -->
+        <section class="content-header"  style="height:60px">
+             <h1 id="id" th:text="${renewal.id}" style="float:left">
+                id
+            </h1>
+             <div  style="margin-left:500px;">
+		        <a th:href="@{'/renewal/edit/' + ${renewal.id}}" href="rnewalEdit.html" class="btn btn-primary">
+		          编辑
+		        </a>
+		        <a th:href="@{'/renewal/delete/' + ${renewal.id}}" href="renewalList.html" class="btn btn-danger" >
+		          删除
+		        </a>
+		       
+		      </div>
+        </section>
+        
+    </aside><!-- /.right-side -->
+    <div layout:fragment="content" class="container" style= "margin-left:240px">
+      <div class="alert alert-success"
+          th:if="${globalMessage}"
+          th:text="${globalMessage}" style= "margin-left:20px">
+        Some Success message
+      </div>
+     
+      
+      <div style="margin-top:30px;width:400px;margin-left:30px">
+      <table class="table table-bordered table-striped">
+			
+			<tbody>
+			
+				<tr>
+					<td  width="120px">合同ID</td>
+					<td  th:text="${renewal.contractId}"> name </td>
+				</tr>
+				<tr>
+					<td>计划续签时间</td>
+					<td  th:text="${renewal.plannedDateOfRenewal}">state</td>
+				</tr>
+				<tr>
+					<td >实际续签时间</td>
+					<td th:text="${renewal.actualDateOfRenewal}">content</td>
+				</tr>
+				<tr>
+					<td>提醒日期</td>
+					<td th:text="${renewal.alertDate}">state</td>
+				
+				</tr>
+			</tbody>
+		</table>
+      
+		
+		
+		<div class="panel panel-info" style="width:500px">
+		  <div class="panel-heading">
+		    <h3 class="panel-title">内容</h3>
+		  </div>
+		  <div class="panel-body" id="content"
+            th:text="${renewal.content}">
+         	content
+		  </div>		  
+		</div>
+		
+      </div>
+      
+    </div>
+  </body>
+</html>
